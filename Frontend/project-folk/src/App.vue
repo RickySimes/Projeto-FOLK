@@ -1,4 +1,3 @@
-<!-------------------------------------------- TEMPLATE -------------------------------------------->
 <template>
   <div class="flex flex-col min-h-screen">
     <!-- Header -->
@@ -7,7 +6,7 @@
         <ul class="flex space-x-8 md:space-x-24 font-folk text-sm md:text-base">
           <li><a href="#" class="hover:text-gray-200">Home</a></li>
           <li><a target="_blank" href="https://issuu.com/cofit/docs/folk_azores_2024_cartaz_a4_web" class="hover:text-gray-200">Programa</a></li>
-          <li><a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSeEQK0hthbWjTuLAV9P5lKVmjROvyPfbMjaHnAnA55IEc9sGg/viewform?usp=send_form" class="hover:text-gray-200">Voluntariado</a></li>
+          <li><router-link to="/Volunteer" class="hover:text-gray-200">Voluntariado</router-link></li>
           <li><a href="#" class="hover:text-gray-200">História</a></li>
         </ul>
       </nav>
@@ -31,8 +30,8 @@
       <!-- Main Content Layered on Top of Carousel -->
       <div class="absolute inset-0 flex items-center justify-center z-10">
         <div class="flex flex-col items-center justify-center text-white font-folk text-center bg-black bg-opacity-80 p-4 w-full h-full">
-          <h1 class="text-5xl md:text-7xl lg:text-9xl font-bold mb-2">FOLK</h1>
-          <h1 class="text-5xl md:text-7xl lg:text-9xl font-bold mt-2">AZORES</h1>
+          <h1 class="text-5xl md:text-7xl lg:text-9xl font-bold mb-2 select-none">FOLK</h1>
+          <h1 class="text-5xl md:text-7xl lg:text-9xl font-bold mt-2 select-none">AZORES</h1>
         </div>
       </div>
     </main>
@@ -48,9 +47,6 @@
     </footer>
   </div>
 </template>
-
-
-<!-------------------------------------------- SCRIPTS -------------------------------------------->
 
 <script>
 export default {
