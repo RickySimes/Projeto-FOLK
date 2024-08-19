@@ -33,12 +33,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
-                .csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/login","/register").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/public/**","/register","/login").permitAll()
+                        .anyRequest().authenticated()
+                ).formLogin(form ->form
+                        .loginPage("/login")
+                        .permitAll()
+                ).logout(logout -> logout
+                        .permitAll()
+                );
+        return http.build();
     }
 
     @Autowired

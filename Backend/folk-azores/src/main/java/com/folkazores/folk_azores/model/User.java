@@ -1,15 +1,18 @@
 package com.folkazores.folk_azores.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
-@Table(name = "users")
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -22,4 +25,9 @@ public class User {
     @Column(nullable = false, length = 255)
     private String password;
 
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
