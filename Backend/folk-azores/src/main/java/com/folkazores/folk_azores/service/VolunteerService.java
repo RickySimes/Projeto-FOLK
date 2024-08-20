@@ -9,7 +9,6 @@ public interface VolunteerService {
 
     List<Volunteer> getAllVolunteers();
     Optional<Volunteer> getVolunteerByID(Long id);
-    Volunteer createVolunteer();
-    void DeleteVolunteer(Long id);
-    Volunteer updateVolunteer(Long id, Volunteer volunteer);
+    Volunteer createVolunteer(Volunteer volunteer);
+    void deleteVolunteer(Long id);
 }

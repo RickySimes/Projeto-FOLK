@@ -3,10 +3,12 @@ package com.folkazores.folk_azores.service;
 import com.folkazores.folk_azores.model.Volunteer;
 import com.folkazores.folk_azores.repository.VolunteerRepostiory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class VolunteerServiceImpl implements VolunteerService {
 
     @Autowired
@@ -14,26 +16,22 @@ public class VolunteerServiceImpl implements VolunteerService {
 
     @Override
     public List<Volunteer> getAllVolunteers() {
-        return List.of();
+        return volunteerRepostiory.findAll();
     }
 
     @Override
     public Optional<Volunteer> getVolunteerByID(Long id) {
-        return Optional.empty();
+        return volunteerRepostiory.findById(id);
     }
 
     @Override
-    public Volunteer createVolunteer() {
-        return null;
+    public Volunteer createVolunteer(Volunteer volunteer) {
+        return volunteerRepostiory.save(volunteer);
     }
 
-    @Override
-    public void DeleteVolunteer(Long id) {
-
-    }
 
     @Override
-    public Volunteer updateVolunteer(Long id, Volunteer volunteer) {
-        return null;
+    public void deleteVolunteer(Long id) {
+        volunteerRepostiory.deleteById(id);
     }
 }
