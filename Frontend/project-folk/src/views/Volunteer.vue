@@ -16,28 +16,28 @@
     <!-- Main Content -->
     <main class="flex-grow flex items-center justify-center bg-gray-100">
       <div class="w-full max-w-4xl p-8 bg-white font-folk rounded-lg shadow-md">
-        <form class="space-y-6">
+        <form @submit.prevent="handleSubmit" class="space-y-6">
           <h1 class="text-2xl font-bold mb-6 text-gray-800">Voluntariado Folk Azores</h1>
 
           <!-- Full Name -->
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="fullName">Nome Completo</label>
-            <input
+            <input v-model="formData.fullName"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="fullName" type="text" placeholder="Nome Completo" />
+              id="fullName" type="text" placeholder="Nome Completo"/>
           </div>
 
           <!-- Email -->
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-            <input
+            <input v-model="formData.email"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="email" type="email" placeholder="Email" />
           </div>
 
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="birthdate">Data de Nascimento</label>
-            <input
+            <input v-model="formData.birthdate"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="birthdate" type="text" placeholder="Data de Nascimento" />
           </div>
@@ -45,28 +45,35 @@
           <!-- Phone Number -->
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Telemóvel</label>
-            <input
+            <input v-model="formData.phone"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="phone" type="tel" placeholder="Telemóvel" />
+              id="phone" type="number" placeholder="Telemóvel" />
           </div>
 
           <!-- T-Shirt Size -->
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">Tamanho da T-Shirt</label>
             <div class="flex flex-wrap items-center space-x-6">
-              <label class="flex items-center"><input type="radio" name="tshirtSize" value="XS" class="radio-button">
+              <label class="flex items-center"><input type="radio" name="tshirtSize" value="XS" class="radio-button"
+                  v-model="formData.tshirtSize">
                 XS</label>
-              <label class="flex items-center"><input type="radio" name="tshirtSize" value="S" class="radio-button">
+              <label class="flex items-center"><input type="radio" name="tshirtSize" value="S" class="radio-button"
+                  v-model="formData.tshirtSize">
                 S</label>
-              <label class="flex items-center"><input type="radio" name="tshirtSize" value="M" class="radio-button">
+              <label class="flex items-center"><input type="radio" name="tshirtSize" value="M" class="radio-button"
+                  v-model="formData.tshirtSize">
                 M</label>
-              <label class="flex items-center"><input type="radio" name="tshirtSize" value="L" class="radio-button">
+              <label class="flex items-center"><input type="radio" name="tshirtSize" value="L" class="radio-button"
+                  v-model="formData.tshirtSize">
                 L</label>
-              <label class="flex items-center"><input type="radio" name="tshirtSize" value="XL" class="radio-button">
+              <label class="flex items-center"><input type="radio" name="tshirtSize" value="XL" class="radio-button"
+                  v-model="formData.tshirtSize">
                 XL</label>
-              <label class="flex items-center"><input type="radio" name="tshirtSize" value="XXL" class="radio-button">
+              <label class="flex items-center"><input type="radio" name="tshirtSize" value="XXL" class="radio-button"
+                  v-model="formData.tshirtSize">
                 XXL</label>
-              <label class="flex items-center"><input type="radio" name="tshirtSize" value="XXXL" class="radio-button">
+              <label class="flex items-center"><input type="radio" name="tshirtSize" value="XXXL" class="radio-button"
+                  v-model="formData.tshirtSize">
                 XXXL</label>
             </div>
           </div>
@@ -74,17 +81,17 @@
           <!-- CC Number -->
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="ccNumber">N.º Cartão de Cidadão</label>
-            <input
+            <input v-model="formData.ccNumber"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="ccNumber" type="text" placeholder="Your Credit Card Number" />
+              id="ccNumber" type="number" placeholder="Your Credit Card Number" />
           </div>
 
           <!-- NIF -->
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="nif">N.º Identificação Fiscal</label>
-            <input
+            <input v-model="formData.nif"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="nif" type="text" placeholder="Your NIF" />
+              id="nif" type="number" placeholder="Your NIF" />
           </div>
 
           <!-- Education Level -->
@@ -92,17 +99,17 @@
             <label class="block text-gray-700 text-sm font-bold mb-2">Habilitações Literárias</label>
             <div class="flex flex-wrap items-center space-x-4">
               <label class="flex items-center"><input type="radio" name="educationLevel" value="Basico"
-                  class="radio-button"> Básico</label>
+                  class="radio-button" v-model="formData.educationLevel"> Básico</label>
               <label class="flex items-center"><input type="radio" name="educationLevel" value="Secundario"
-                  class="radio-button">
+                  class="radio-button" v-model="formData.educationLevel">
                 Secundário</label>
               <label class="flex items-center"><input type="radio" name="educationLevel" value="Licenciatura"
-                  class="radio-button">
+                  class="radio-button" v-model="formData.educationLevel">
                 Licenciatura</label>
               <label class="flex items-center"><input type="radio" name="educationLevel" value="Mestrado"
-                  class="radio-button"> Mestrado</label>
+                  class="radio-button" v-model="formData.educationLevel"> Mestrado</label>
               <label class="flex items-center"><input type="radio" name="educationLevel" value="Doutoramento"
-                  class="radio-button">
+                  class="radio-button" v-model="formData.educationLevel">
                 Doutoramento</label>
             </div>
           </div>
@@ -110,7 +117,7 @@
           <!-- Facebook Link -->
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="facebook">Facebook</label>
-            <input
+            <input v-model="formData.facebook"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="facebook" type="url" placeholder="Facebook Profile Link" />
           </div>
@@ -118,7 +125,7 @@
           <!-- Instagram Link -->
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="instagram">Instagram</label>
-            <input
+            <input v-model="formData.instagram"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="instagram" type="url" placeholder="Instagram Profile Link" />
           </div>
@@ -126,7 +133,7 @@
           <!-- Occupation -->
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="occupation">Ocupação</label>
-            <input
+            <input v-model="formData.occupation"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="occupation" type="text" placeholder="Your Occupation" />
           </div>
@@ -135,18 +142,41 @@
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">Idioma(s)</label>
             <div class="flex flex-wrap items-center space-x-4">
-              <label class="flex items-center"><input type="checkbox" name="languages" value="Inglês" class="checkbox"> Inglês</label>
-              <label class="flex items-center"><input type="checkbox" name="languages" value="Espanhol" class="checkbox"> Espanhol</label>
-              <label class="flex items-center"><input type="checkbox" name="languages" value="Frances" class="checkbox"> Francês</label>
-              <label class="flex items-center"><input type="checkbox" name="languages" value="Alemao" class="checkbox"> Alemão</label>
-              <label class="flex items-center"><input type="checkbox" name="languages" value="Italiano" class="checkbox"> Italiano</label>
-              <label class="flex items-center"><input type="checkbox" name="languages" value="Russo" class="checkbox"> Russo</label>
-              <label class="flex items-center"><input type="checkbox" name="languages" value="Ucraniano" class="checkbox"> Ucraniano</label>
-              
+              <label class="flex items-center">
+                <input type="checkbox" name="languages" value="Inglês" class="checkbox" v-model="formData.languages">
+                Inglês
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" name="languages" value="Espanhol" class="checkbox" v-model="formData.languages">
+                Espanhol
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" name="languages" value="Frances" class="checkbox" v-model="formData.languages">
+                Francês
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" name="languages" value="Alemao" class="checkbox" v-model="formData.languages">
+                Alemão
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" name="languages" value="Italiano" class="checkbox" v-model="formData.languages">
+                Italiano
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" name="languages" value="Russo" class="checkbox" v-model="formData.languages">
+                Russo
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" name="languages" value="Ucraniano" class="checkbox" v-model="formData.languages">
+                Ucraniano
+              </label>
             </div>
-            <label class="flex mt-4 mb-2 items-center"><input type="checkbox" name="languages" value="Other" class="checkbox"> Other</label>
+
+            <label class="flex mt-4 mb-2 items-center">
+              <input type="checkbox" class="checkbox" v-model="customLanguageEnabled"> Other
+            </label>
             <!-- Textbox for Other Language -->
-            <input
+            <input v-if="customLanguageEnabled" v-model="formData.otherLanguage"
               class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="otherLanguage" type="text" placeholder="Specify Other Language" />
           </div>
@@ -155,13 +185,23 @@
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">Área de voluntariado pretendida</label>
             <div class="flex flex-wrap items-center space-x-4">
-              <label class="flex items-center"><input type="checkbox" name="areas" value="Acompanhamento de grupos" class="checkbox">
+              <label class="flex items-center"><input type="checkbox" name="areas" value="Acompanhamento de grupos"
+                  class="checkbox" v-model="formData.areas">
                 Acompanhamento de Grupos</label>
-                <label class="flex items-center"><input type="checkbox" name="areas" value="Secretariado" class="checkbox"> Secretariado</label>
-                <label class="flex items-center"><input type="checkbox" name="areas" value="Multimedia" class="checkbox"> Multimédia</label>
-                <label class="flex items-center"><input type="checkbox" name="areas" value="Logistica" class="checkbox"> Logística</label>
-                <label class="flex items-center"><input type="checkbox" name="areas" value="Vendas" class="checkbox"> Vendas</label>
-                <label class="flex items-center"><input type="checkbox" name="areas" value="Bar" class="checkbox"> Bar</label>
+              <label class="flex items-center"><input type="checkbox" name="areas" value="Secretariado" class="checkbox"
+                  v-model="formData.areas"> Secretariado</label>
+              <label class="flex items-center"><input type="checkbox" name="areas" value="Multimedia" class="checkbox"
+                  v-model="formData.areas">
+                Multimédia</label>
+              <label class="flex items-center"><input type="checkbox" name="areas" value="Logistica" class="checkbox"
+                  v-model="formData.areas">
+                Logística</label>
+              <label class="flex items-center"><input type="checkbox" name="areas" value="Vendas" class="checkbox"
+                  v-model="formData.areas">
+                Vendas</label>
+              <label class="flex items-center"><input type="checkbox" name="areas" value="Bar" class="checkbox"
+                  v-model="formData.areas">
+                Bar</label>
             </div>
           </div>
 
@@ -169,8 +209,10 @@
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">Disponibilidade Semanal</label>
             <div class="flex items-center space-x-4">
-              <label class="flex items-center"><input type="checkbox" name="availability" value="Semana" class="checkbox"> Semana</label>
-              <label class="flex items-center"><input type="checkbox" name="availability" value="Fim-de-semana" class="checkbox">
+              <label class="flex items-center"><input type="checkbox" name="availability" value="Semana"
+                  class="checkbox" v-model="formData.availability"> Semana</label>
+              <label class="flex items-center"><input type="checkbox" name="availability" value="Fim-de-semana"
+                  class="checkbox" v-model="formData.availability">
                 Fim-de-semana</label>
             </div>
           </div>
@@ -179,17 +221,19 @@
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">Disponibilidade no período do dia</label>
             <div class="flex items-center space-x-4">
-              <label class="flex items-center"><input type="checkbox" name="timeAvailability" value="Manha" class="checkbox"> Manhã</label>
-              <label class="flex items-center"><input type="checkbox" name="timeAvailability" value="Tarde" class="checkbox"> Tarde</label>
-              <label class="flex items-center"><input type="checkbox" name="timeAvailability" value="Noite" class="checkbox"> Noite</label>
+              <label class="flex items-center"><input type="checkbox" name="timeAvailability" value="Manha"
+                  class="checkbox" v-model="formData.timeAvailability"> Manhã</label>
+              <label class="flex items-center"><input type="checkbox" name="timeAvailability" value="Tarde"
+                  class="checkbox" v-model="formData.timeAvailability"> Tarde</label>
+              <label class="flex items-center"><input type="checkbox" name="timeAvailability" value="Noite"
+                  class="checkbox" v-model="formData.timeAvailability"> Noite</label>
             </div>
           </div>
 
           <!-- Submit Button -->
           <div class="flex items-center justify-between">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button">
+            <button :disabled="!isFormValid" :class="{ 'btn-disabled': !isFormValid }" type="submit">
+
               Submit
             </button>
           </div>
@@ -213,6 +257,23 @@
 
 <style>
 /* Google-style radio button */
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Disabled button styling */
+.btn-disabled {
+  background-color: #a0c4ff; /* Lighter shade of blue */
+  cursor: not-allowed;
+}
+
 .radio-button {
   appearance: none;
   background-color: #fff;
@@ -299,18 +360,124 @@
 
 <script>
 
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent, ref, onMounted, computed, watch} from 'vue';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 export default defineComponent({
   setup() {
+
+    const formData = ref({
+      fullName: '',
+      email: '',
+      birthdate: '',
+      phone: '',
+      tshirtSize: '',
+      ccNumber: '',
+      nif: '',
+      educationLevel: '',
+      facebook: '',
+      instagram: '',
+      occupation: '',
+      languages: [],
+      otherLanguage: '',
+      areas: [],
+      availability: [],
+      timeAvailability: []
+    });
+
+    const isFormValid = computed(() => {
+      return (
+        formData.value.fullName &&
+        formData.value.email &&
+        formData.value.birthdate &&
+        formData.value.phone &&
+        formData.value.ccNumber &&
+        formData.value.nif &&
+        formData.value.languages.length > 0 &&
+        formData.value.areas.length > 0 &&
+        formData.value.availability.length > 0 &&
+        formData.value.timeAvailability.length > 0 &&
+        (!customLanguageEnabled.value || formData.value.otherLanguage)
+      );
+    });
+    
+    const customLanguageEnabled = ref(false);
+
     onMounted(() => {
       flatpickr('#birthdate', {
         dateFormat: 'Y-m-d',
-        locale: 'pt', // Optional: Set locale to Portuguese if needed
+        onChange: (selectedDates, dateStr) => {
+          formData.value.birthdate = dateStr;
+        }
       });
     });
+
+    watch(formData, () => {}, { deep: true });
+
+    const handleSubmit = async () => {
+      const data = { ...formData.value };
+
+      // If custom language is enabled and the otherLanguage field is not empty
+      if (customLanguageEnabled.value && formData.value.otherLanguage) {
+        data.languages.push(formData.value.otherLanguage); // Add the custom language to the languages array
+      }
+
+      console.log(data);
+
+      const jsonData = JSON.stringify(data);  
+
+      try {
+        const response = await fetch('http://localhost:8080', { // Include http:// for fetch URL
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: jsonData,
+        });
+        if (response.ok) {
+          const result = await response.json();
+          alert('Form submitted successfully!');
+          resetForm();
+          console.log(result);
+        } else {
+          console.error('Error:', response.statusText);
+          resetForm();
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+      }
+    };
+    
+    const resetForm = () => {
+      formData.value = {
+        fullName: '',
+        email: '',
+        birthdate: '',
+        phone: '',
+        tshirtSize: '',
+        ccNumber: '',
+        nif: '',
+        educationLevel: '',
+        facebook: '',
+        instagram: '',
+        occupation: '',
+        languages: [],
+        otherLanguage: '',
+        areas: [],
+        availability: [],
+        timeAvailability: [],
+      };
+      customLanguageEnabled.value = false; 
+    };
+
+    return {
+      formData,
+      customLanguageEnabled,
+      handleSubmit,
+      resetForm,
+      isFormValid
+    };
   },
 });
 
