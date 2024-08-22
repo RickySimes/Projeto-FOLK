@@ -13,7 +13,6 @@
               class="hover:text-gray-200">Programa</a>
           </li>
           <li><router-link to="/Volunteer" class="hover:text-gray-200">Voluntariado</router-link></li>
-          <li><a href="#" class="hover:text-gray-200">História</a></li>
         </ul>
 
         <div class="flex items-center justify-end w-1/3">

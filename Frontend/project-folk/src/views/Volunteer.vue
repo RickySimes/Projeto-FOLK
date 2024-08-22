@@ -8,7 +8,6 @@
           <li><a target="_blank" href="https://issuu.com/cofit/docs/folk_azores_2024_cartaz_a4_web"
               class="hover:text-gray-200">Programa</a></li>
           <li><router-link to="/Volunteer" class="hover:text-gray-200">Voluntariado</router-link></li>
-          <li><a href="#" class="hover:text-gray-200">História</a></li>
         </ul>
       </nav>
     </header>
