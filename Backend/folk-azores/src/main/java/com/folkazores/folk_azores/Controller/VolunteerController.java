@@ -3,6 +3,7 @@ package com.folkazores.folk_azores.Controller;
 import com.folkazores.folk_azores.model.Volunteer;
 import com.folkazores.folk_azores.repository.VolunteerRepostiory;
 import com.folkazores.folk_azores.service.VolunteerServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -14,9 +15,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/volunteers")
+@AllArgsConstructor
 public class VolunteerController {
 
-    @Autowired
+
     private VolunteerServiceImpl volunteerService;
 
     @GetMapping
