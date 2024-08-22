@@ -46,7 +46,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Telemóvel</label>
             <input v-model="formData.phone"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="phone" type="number" placeholder="Telemóvel" />
+              id="phone" type="number" inputmode="numeric" placeholder="Telemóvel" />
           </div>
 
           <!-- T-Shirt Size -->
@@ -82,7 +82,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="cc_number">N.º Cartão de Cidadão</label>
             <input v-model="formData.cc_number"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="cc_number" type="number" placeholder="Número Cartão de Cidadão" />
+              id="cc_number" type="number" inputmode="numeric" placeholder="Número Cartão de Cidadão" />
           </div>
 
           <!-- NIF -->
@@ -90,7 +90,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="nif">N.º Identificação Fiscal</label>
             <input v-model="formData.nif"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="nif" type="number" placeholder="Número de Identificação Fiscal" />
+              id="nif" type="number" inputmode="numeric" placeholder="Número de Identificação Fiscal" />
           </div>
 
           <!-- Education Level -->
@@ -184,7 +184,7 @@
             <!-- Textbox for Other Language -->
             <input v-if="customLanguageEnabled" v-model="formData.otherLanguage"
               class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="otherLanguage" type="text" placeholder="Specify Other Language" />
+              id="otherLanguage" type="text" placeholder="Especificar Outra Língua" />
           </div>
 
           <!-- Areas of Interest -->
@@ -240,7 +240,7 @@
           <div class="flex items-center justify-between">
             <button :disabled="!isFormValid" :class="{ 'btn-disabled': !isFormValid }" type="submit">
 
-              Submit
+              Submeter
             </button>
           </div>
         </form>
@@ -413,6 +413,7 @@ export default defineComponent({
 
     onMounted(() => {
       flatpickr('#birthdate', {
+        maxDate: "today",
         dateFormat: 'Y-m-d',
         onChange: (selectedDates, dateStr) => {
           formData.value.birthdate = dateStr;
