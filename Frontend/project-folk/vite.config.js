@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target:'http://localhost:8000',
+        target:'https://projeto-folk.vercel.app/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
 

@@ -447,7 +447,7 @@ export default defineComponent({
 
       try {
         // Await the fetch call and get the response object directly
-        const response = await fetch('http://localhost:8080/api/volunteers', {
+        const response = await fetch('https://projeto-folk.vercel.app/api/volunteers', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
