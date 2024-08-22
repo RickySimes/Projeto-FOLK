@@ -447,7 +447,7 @@ export default defineComponent({
 
       try {
         // Await the fetch call and get the response object directly
-        const response = await fetch('projeto-folk-production.up.railway.app/api/volunteers', {
+        const response = await fetch('https://projeto-folk-production.up.railway.app/api/volunteers', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
