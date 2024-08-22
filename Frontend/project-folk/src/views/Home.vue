@@ -65,9 +65,10 @@ export default {
     return {
       currentIndex: 0,
       images: [
-        'https://scontent.fpdl1-1.fna.fbcdn.net/v/t39.30808-6/449782488_1051455096542455_1870533574522364460_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=P7skCbZMLXMQ7kNvgFM2Gg_&_nc_ht=scontent.fpdl1-1.fna&oh=00_AYCrNJNfkCX-BrSX_-5qpejZqGSVQ_c8wJcQeT2ncanKtg&oe=66C2F323',
-        'https://scontent.fpdl1-1.fna.fbcdn.net/v/t39.30808-6/301877786_2297601413727553_1407009636535036503_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=86c6b0&_nc_ohc=UQlIyNDkrXQQ7kNvgEA1JS5&_nc_ht=scontent.fpdl1-1.fna&oh=00_AYD1En3_rtLU1Q59swnwT5e8TRbCbH62gmRy0AdINBwtLA&oe=66C2C5AC',
-        'https://scontent.fpdl1-1.fna.fbcdn.net/v/t39.30808-6/436381765_1001826158172016_6081355761918627531_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_ohc=oi-vmBLRQSYQ7kNvgFRE0_O&_nc_ht=scontent.fpdl1-1.fna&oh=00_AYCF9GtzOfw6I6IwMx8OOJpGwlEb76QKg_6ucrblEZ2xAA&oe=66C2F03B'
+        '/images/image1.jpg',  
+        '/images/image2.jpg',
+        '/images/image3.jpg',
+        '/images/image4.jpg'
       ]
     };
   },
