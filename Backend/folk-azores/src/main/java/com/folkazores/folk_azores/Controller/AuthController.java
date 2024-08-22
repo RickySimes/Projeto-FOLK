@@ -1,42 +1,45 @@
 package com.folkazores.folk_azores.Controller;
 
-import com.folkazores.folk_azores.model.User;
-import com.folkazores.folk_azores.repository.UserRepository;
+import com.folkazores.folk_azores.util.JWT.AuthRequest;
+import com.folkazores.folk_azores.util.JWT.AuthResponse;
+import com.folkazores.folk_azores.util.JWT.JwtUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
+@RestController
+@RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    public AuthController(BCryptPasswordEncoder passwordEncoder, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
+        this.authenticationManager = authenticationManager;
+    }
 
-    @Value("${app.secret-keyword}")
-    private String secretKeyword;
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+            );
 
-    @PostMapping("/api/register")
-    public ResponseEntity<?> registerUser(@RequestBody Map<String, String> request){
-        String username = request.get("username");
-        String password = request.get("password");
-        String secretKeywordRequest = request.get("secretKeyword");
-
-        if (!secretKeywordRequest.equals(secretKeyword)){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid secret keyword");
+            String token = jwtUtil.generateToken(authRequest.getUsername());
+            return ResponseEntity.ok(new AuthResponse(token));
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(401).body("Invalid username or password");
         }
-
-        String encodedPassword = passwordEncoder.encode(password);
-        User newUser = new User(username,password);
-        userRepository.save(newUser);
-
-        return ResponseEntity.ok("User registered successfully");
     }
 }

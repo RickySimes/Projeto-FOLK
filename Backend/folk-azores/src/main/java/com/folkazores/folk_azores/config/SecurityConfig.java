@@ -1,18 +1,20 @@
 package com.folkazores.folk_azores.config;
 
-import com.folkazores.folk_azores.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.folkazores.folk_azores.util.filters.JwtAuthenticationFilter;
+import com.folkazores.folk_azores.util.filters.JwtAuthorizationFilter;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -21,32 +23,37 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig{
 
-    private UserDetailsServiceImpl userDetailsService;
 
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthorizationFilter jwtAuthorizationFilter;
+    private final UserDetailsService userDetailsService;
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService,PasswordEncoder passwordEncoder){
-        this.userDetailsService = userDetailsService;
+
+    public SecurityConfig(PasswordEncoder passwordEncoder, JwtAuthenticationFilter jwtAuthenticationFilter,
+                          JwtAuthorizationFilter jwtAuthorizationFilter, UserDetailsService userDetailsService) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.jwtAuthorizationFilter = jwtAuthorizationFilter;
         this.passwordEncoder = passwordEncoder;
+        this.userDetailsService = userDetailsService;
     }
 
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder);
-        return authenticationProvider;
-    }
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/volunteers/**").permitAll()
+                        .requestMatchers("/secured/**").authenticated()
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(httpBasic -> httpBasic.disable())
+                .formLogin(formLogin -> formLogin.disable());
 
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/public/**", "/register", "/login","/api/volunteers").permitAll()
-                        .anyRequest().authenticated())
-                        .cors(Customizer.withDefaults())
-                        .csrf(csrf -> csrf.disable());
         return http.build();
     }
 
@@ -63,8 +70,15 @@ public class SecurityConfig {
         return source;
     }
 
-    @Autowired
-    public void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(authenticationProvider());
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                new AuthenticationManagerBuilder(http.getSharedObject(ObjectPostProcessor.class));
+
+        authenticationManagerBuilder
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder);
+
+        return authenticationManagerBuilder.build();
     }
 }
