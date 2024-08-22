@@ -362,6 +362,17 @@ button {
   .form-container textarea {
     font-size: 0.875rem;
   }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+    /* For Firefox */
+  }
 }
 </style>
 
