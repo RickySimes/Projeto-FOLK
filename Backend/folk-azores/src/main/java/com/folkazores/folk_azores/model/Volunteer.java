@@ -1,5 +1,7 @@
 package com.folkazores.folk_azores.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.folkazores.folk_azores.util.VolunteerDeserializer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Table(name = "volunteers")
+@JsonDeserialize(using = VolunteerDeserializer.class)
 public class Volunteer {
 
     @Id
